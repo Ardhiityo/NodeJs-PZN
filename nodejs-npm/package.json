@@ -27,7 +27,8 @@
     "url": "https://github.com/npm/example.git"
   },
   "dependencies": {
-    "lodash": "^4.18.1"
+    "lodash": "^4.18.1",
+    "nodejs-membuat-library": "^1.0.0"
   },
   "devDependencies": {
     "moment": "x"
