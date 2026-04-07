@@ -5,7 +5,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prestart": "echo 'Application before start'",
+    "start": "node index.js",
+    "poststart": "echo 'Application after start'",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "example": "echo 'Custom scripts command: npm run-script example'"
   },
   "keywords": [
     "pzn",
