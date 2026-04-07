@@ -12,5 +12,10 @@
     "nodejs"
   ],
   "author": "Arya",
-  "license": "ISC"
+  "license": "ISC",
+  "homepage": "https://github.com/npm/example#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/npm/example.git"
+  }
 }
