@@ -1,1 +1,3 @@
-console.log('hello world');
+import { writeFile } from "./write.js";
+
+writeFile("app.log", "hello world");
