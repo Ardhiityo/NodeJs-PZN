@@ -45,4 +45,5 @@ it('mock class findById module', () => {
 
     expect(userService.findById(12)).toEqual(user);
     expect(userRepository.findById).toHaveBeenCalled();
+    expect(userRepository.findById).toHaveBeenCalledWith(12);
 })
