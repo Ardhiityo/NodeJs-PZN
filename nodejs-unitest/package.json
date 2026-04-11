@@ -20,6 +20,7 @@
         "statements": 100
       }
     },
+    "maxConcurrency": 8,
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
       "!**/vendor/**"
