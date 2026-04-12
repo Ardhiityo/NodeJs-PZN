@@ -1,0 +1,25 @@
+{
+  "name": "nodejs-logging",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
+  "author": "Arya",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.29.2",
+    "babel-jest": "^30.3.0",
+    "jest": "^30.3.0"
+  },
+  "dependencies": {
+    "winston": "^3.19.0"
+  }
+}
