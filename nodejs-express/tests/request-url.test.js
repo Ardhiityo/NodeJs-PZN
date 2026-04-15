@@ -16,7 +16,7 @@ test('request / test', async () => {
     const response = await request(app)
         .get('/hello/world')
         .query({ name: 'World' });
-    console.log(response);
+
     expect(response.body).toEqual({
         path: '/hello/world',
         originalUrl: '/hello/world?name=World',
