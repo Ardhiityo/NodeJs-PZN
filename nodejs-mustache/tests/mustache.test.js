@@ -26,3 +26,16 @@ test("mustache tags", () => {
 
     expect(template).toBe("Hello John my hobby is <b>Coding</b>");
 });
+
+test("mustache nested object", () => {
+    //proses render template, langsung menggunakan template yang sudah di compile
+    const template = Mustache.render("Hello {{person.name}}",
+        {
+            person: {
+                name: "John"
+            }
+        }
+    );
+
+    expect(template).toBe("Hello John");
+});
