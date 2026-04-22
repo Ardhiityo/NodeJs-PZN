@@ -102,3 +102,18 @@ test('comments', async () => {
     expect(rendered).toContain("Eko");
     expect(rendered).not.toContain("Komentar");
 });
+
+test('partials', async () => {
+    const template = await readFile(__dirname + "/../views/content.mustache", 'utf-8');
+
+    const partials = {
+        header: await readFile(__dirname + "/../views/header.mustache", 'utf-8'),
+        footer: await readFile(__dirname + "/../views/footer.mustache", 'utf-8')
+    };
+
+    const rendered = Mustache.render(template, {
+        author: "Eko"
+    }, partials);
+    
+    expect(rendered).toContain("Eko");
+});
