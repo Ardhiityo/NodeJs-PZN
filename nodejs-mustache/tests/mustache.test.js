@@ -91,3 +91,14 @@ test('functions', () => {
 
     expect(data).toContain("EKO");
 });
+
+test('comments', async () => {
+    const template = await readFile(__dirname + "/../views/comment.mustache", 'utf-8');
+
+    const rendered = Mustache.render(template, {
+        title: "Eko"
+    });
+
+    expect(rendered).toContain("Eko");
+    expect(rendered).not.toContain("Komentar");
+});
