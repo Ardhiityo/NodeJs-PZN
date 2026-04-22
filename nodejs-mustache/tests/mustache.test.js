@@ -47,3 +47,10 @@ test('mustache file', async () => {
     const rendered = Mustache.render(template, { name: "John" });
     expect(rendered).toContain("Hello John");
 });
+
+test('mustache sections', async () => {
+    const template = await readFile(__dirname + "/../views/person.mustache", 'utf-8');
+  
+    const rendered = Mustache.render(template, { person: { name: "John" } });
+    expect(rendered).toContain("Hello John");
+});
