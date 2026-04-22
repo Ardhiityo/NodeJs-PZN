@@ -43,14 +43,21 @@ test("mustache nested object", () => {
 
 test('mustache file', async () => {
     const template = await readFile(__dirname + "/../views/hello.mustache", 'utf-8');
-  
+
     const rendered = Mustache.render(template, { name: "John" });
     expect(rendered).toContain("Hello John");
 });
 
 test('mustache sections', async () => {
     const template = await readFile(__dirname + "/../views/person.mustache", 'utf-8');
-  
+
     const rendered = Mustache.render(template, { person: { name: "John" } });
     expect(rendered).toContain("Hello John");
+});
+
+test('inverted sections', async () => {
+    const template = await readFile(__dirname + "/../views/person.mustache", 'utf-8');
+
+    const rendered = Mustache.render(template, {});
+    expect(rendered).toContain("Hello guest");
 });
