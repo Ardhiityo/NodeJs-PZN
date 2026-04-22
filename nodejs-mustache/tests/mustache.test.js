@@ -61,3 +61,18 @@ test('inverted sections', async () => {
     const rendered = Mustache.render(template, {});
     expect(rendered).toContain("Hello guest");
 });
+
+test('list', async () => {
+    const template = await readFile(__dirname + "/../views/list.mustache", 'utf-8');
+
+    const rendered = Mustache.render(template, {
+        hobbies: [
+            "Coding",
+            "Reading",
+            "Gaming"
+        ]
+    });
+    expect(rendered).toContain("Coding");
+    expect(rendered).toContain("Reading");
+    expect(rendered).toContain("Gaming");
+});
