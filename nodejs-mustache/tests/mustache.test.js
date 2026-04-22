@@ -76,3 +76,18 @@ test('list', async () => {
     expect(rendered).toContain("Reading");
     expect(rendered).toContain("Gaming");
 });
+
+test('functions', () => {
+    const parameter = {
+        name: "Eko",
+        upper: () => {
+            return (text, render) => {
+                return render(text).toUpperCase();
+            };
+        }
+    };
+
+    const data = Mustache.render("{{#upper}}{{name}}{{/upper}}", parameter);
+
+    expect(data).toContain("EKO");
+});
