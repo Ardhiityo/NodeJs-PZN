@@ -1,4 +1,5 @@
 import Mustache from "mustache";
+import { readFile } from 'node:fs/promises';
 
 test("mustache render", () => {
     //proses render template, proses cache dilakukan ketika memanggil render
@@ -38,4 +39,11 @@ test("mustache nested object", () => {
     );
 
     expect(template).toBe("Hello John");
+});
+
+test('mustache file', async () => {
+    const template = await readFile(__dirname + "/../views/hello.mustache", 'utf-8');
+  
+    const rendered = Mustache.render(template, { name: "John" });
+    expect(rendered).toContain("Hello John");
 });
