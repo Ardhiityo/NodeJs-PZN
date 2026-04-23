@@ -1,4 +1,4 @@
-import prismaClient from "../src/prisma-client";
+import {prismaClient} from "../src/prisma-client";
 
 test('prisma client test', async () => {
     await prismaClient.$connect();
@@ -7,3 +7,4 @@ test('prisma client test', async () => {
     
     await prismaClient.$disconnect();
 });
+
