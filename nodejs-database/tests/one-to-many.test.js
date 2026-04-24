@@ -45,7 +45,7 @@ test('create customer with many comments', async () => {
             name: "Budi",
             email: "budi@pzn.com",
             phone: "08123456789",
-            comment:
+            comments:
             {
                 create:
                     [
@@ -62,19 +62,19 @@ test('create customer with many comments', async () => {
         },
         include:
         {
-            comment: true
+            comments: true
         }
     });
 
     console.log(customer);
 
-    expect(customer.comment.length).toBe(2);
-    expect(customer.comment[0].title).toBe('Komentar 1');
-    expect(customer.comment[0].description).toBe('Ini adalah komentar pertama');
-    expect(customer.comment[0].customer_id).toBe(customer.id);
-    expect(customer.comment[1].title).toBe('Komentar 2');
-    expect(customer.comment[1].description).toBe('Ini adalah komentar kedua');
-    expect(customer.comment[1].customer_id).toBe(customer.id);
+    expect(customer.comments.length).toBe(2);
+    expect(customer.comments[0].title).toBe('Komentar 1');
+    expect(customer.comments[0].description).toBe('Ini adalah komentar pertama');
+    expect(customer.comments[0].customer_id).toBe(customer.id);
+    expect(customer.comments[1].title).toBe('Komentar 2');
+    expect(customer.comments[1].description).toBe('Ini adalah komentar kedua');
+    expect(customer.comments[1].customer_id).toBe(customer.id);
 });
 
 test('select customer by relation', async () => {
@@ -84,7 +84,7 @@ test('select customer by relation', async () => {
             name: "Budi",
             email: "budi@pzn.com",
             phone: "08123456789",
-            comment:
+            comments:
             {
                 create:
                     [
@@ -104,7 +104,7 @@ test('select customer by relation', async () => {
     const customers = await prismaClient.customer.findMany({
         where:
         {
-            comment:
+            comments:
             {
                 some: {
                     title: {
@@ -115,19 +115,19 @@ test('select customer by relation', async () => {
         },
         include:
         {
-            comment: true
+            comments: true
         }
     });
 
     console.log(customers);
 
-    expect(customers[0].comment.length).toBe(2);
+    expect(customers[0].comments.length).toBe(2);
 
-    expect(customers[0].comment[0].title).toBe('Komentar 1');
-    expect(customers[0].comment[0].description).toBe('Ini adalah komentar pertama');
-    expect(customers[0].comment[0].customer_id).toBe(customer.id);
+    expect(customers[0].comments[0].title).toBe('Komentar 1');
+    expect(customers[0].comments[0].description).toBe('Ini adalah komentar pertama');
+    expect(customers[0].comments[0].customer_id).toBe(customer.id);
 
-    expect(customers[0].comment[1].title).toBe('Komentar 2');
-    expect(customers[0].comment[1].description).toBe('Ini adalah komentar kedua');
-    expect(customers[0].comment[1].customer_id).toBe(customer.id);
+    expect(customers[0].comments[1].title).toBe('Komentar 2');
+    expect(customers[0].comments[1].description).toBe('Ini adalah komentar kedua');
+    expect(customers[0].comments[1].customer_id).toBe(customer.id);
 });
