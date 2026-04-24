@@ -22,6 +22,7 @@ model Customer {
   email String  @unique
   phone String  @unique
   wallet Wallet?
+  comment Comment[]
   
   @@map("customers")
 }
@@ -30,9 +31,19 @@ model Wallet {
   id          Int     @id @default(autoincrement())
   customer_id Int     @unique
   balance     Int
-  customer    Customer @relation(fields: [customer_id], references: [id])
+  customer    Customer @relation(fields: [customer_id], references: [id], onDelete: Cascade)
 
   @@map("wallets")
+}
+
+model Comment {
+  id          Int     @id @default(autoincrement())
+  title       String @db.VarChar(255)
+  description String @db.Text
+  customer_id Int
+  customer    Customer @relation(fields: [customer_id], references: [id], onDelete: Cascade)
+
+  @@map("comments")
 }
 
 model Product {
