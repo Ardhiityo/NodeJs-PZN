@@ -15,14 +15,26 @@ model User {
   
   @@map("users")
 }
-model Customer {
-  id    Int    @id @default(autoincrement())
-  name  String
-  email String @unique
-  phone String @unique
 
+model Customer {
+  id    Int     @id @default(autoincrement())
+  name  String
+  email String  @unique
+  phone String  @unique
+  wallet Wallet?
+  
   @@map("customers")
 }
+
+model Wallet {
+  id          Int     @id @default(autoincrement())
+  customer_id Int     @unique
+  balance     Int
+  customer    Customer @relation(fields: [customer_id], references: [id])
+
+  @@map("wallets")
+}
+
 model Product {
   id    Int    @id @default(autoincrement())
   name  String
