@@ -17,4 +17,7 @@ test("validation date with iso", () => {
 
     expect(error).toBeUndefined();
     expect(value.birthDate).toEqual(new Date("1999-05-05"));
+    
+    // value.birthDate : object new Date()
+    console.log(value.birthDate.toString());
 });
