@@ -1,0 +1,30 @@
+{
+  "name": "nodejs-restful-contact-management",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
+  "author": "Arya",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.29.2",
+    "babel-jest": "^30.3.0",
+    "jest": "^30.3.0"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "express": "^5.2.1",
+    "joi": "^18.1.2",
+    "prisma": "~4.15.0",
+    "supertest": "^7.2.2",
+    "uuid": "^14.0.0",
+    "winston": "^3.19.0"
+  }
+}
