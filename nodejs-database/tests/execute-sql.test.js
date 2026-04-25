@@ -1,5 +1,9 @@
 import {prismaClient} from "../src/prisma-client.js";
 
+beforeEach(async () => {
+    await prismaClient.user.deleteMany({});
+});
+
 test('execute sql', async () => {
     const email = 'eko@gmail.com';
     const name = 'Eko';

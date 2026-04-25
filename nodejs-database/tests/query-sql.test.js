@@ -1,7 +1,7 @@
 import {prismaClient} from "../src/prisma-client.js";
 
 test('execute sql', async () => {
-    const result = await prismaClient.$queryRaw`SELECT * FROM user LIMIT 1`;
+    const result = await prismaClient.$queryRaw`SELECT * FROM users LIMIT 1`;
     
     expect(result.length).toBe(1);
     
