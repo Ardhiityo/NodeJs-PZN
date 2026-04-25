@@ -17,7 +17,7 @@ test("validation option", () => {
     
     if(error) {
         error.details.forEach(error => {
-            console.log(`${error.path} : ${error.message}`);
+            //console.log(`${error.path} : ${error.message}`);
         });
     }
 });
