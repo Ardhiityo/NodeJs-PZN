@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-validation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
+  "author": "Arya",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.29.2",
+    "jest": "^30.3.0"
+  },
+  "dependencies": {
+    "joi": "^18.1.2"
+  }
+}
