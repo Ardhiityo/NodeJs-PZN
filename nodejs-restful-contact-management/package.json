@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "jest"
+    "test": "jest --runInBand"
   },
   "jest": {
     "transform": {
       "^.+\\.[t|j]sx?$": "babel-jest"
-    }
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(uuid)/)"
+    ]
   },
   "author": "Arya",
   "license": "ISC",

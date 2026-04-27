@@ -15,6 +15,8 @@ test("validation string number boolean", () => {
     
     const {error, value} = schema.validate(data);
     
+    console.log(error)
+    
     expect(error).toBeUndefined();
     expect(value).toEqual(data);
 });
