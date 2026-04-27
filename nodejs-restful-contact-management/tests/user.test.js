@@ -157,3 +157,91 @@ test('Unauthenticated error test', async () => {
 
   expect(response.body.errors).toBe("Unauthenticated");
 });
+
+test('register user invalid input test', async () => {
+  const response = await request(web)
+    .post('/api/users')
+    .set('Accept', 'application/json')
+    .set('Content-Type', 'application/json')
+    .send({
+      name: "",
+      username: "",
+      password: ""
+    })
+    .expect(400);
+
+  expect(response.body.errors.name).toBeDefined();
+  expect(response.body.errors.username).toBeDefined();
+  expect(response.body.errors.password).toBeDefined();
+});
+
+test('login user invalid input test', async () => {
+  const response = await request(web)
+    .post('/api/users/login')
+    .set('Accept', 'application/json')
+    .set('Content-Type', 'application/json')
+    .send({
+      username: "",
+      password: ""
+    })
+    .expect(400);
+
+  expect(response.body.errors.username).toBeDefined();
+  expect(response.body.errors.password).toBeDefined();
+});
+
+test('login user with wrong password test', async () => {
+  await prisma.user.create({
+    data: {
+      name: "John Doe",
+      username: "johndoe",
+      password: await bcrypt.hash("@Secret123", 10)
+    }
+  });
+
+  const response = await request(web)
+    .post('/api/users/login')
+    .set('Accept', 'application/json')
+    .set('Content-Type', 'application/json')
+    .send({
+      username: "johndoe",
+      password: "wrongpassword"
+    })
+    .expect(401);
+
+  expect(response.body.errors).toBe("Username or Password is not valid");
+});
+
+test('logout user with invalid token test', async () => {
+  const response = await request(web)
+    .delete('/api/users/logout')
+    .set('Accept', 'application/json')
+    .set('Authorization', 'invalidtoken')
+    .expect(401);
+
+  expect(response.body.errors).toBe("Unauthenticated");
+});
+
+test('update user invalid input test', async () => {
+  const user = await prisma.user.create({
+    data: {
+      name: "John Doe",
+      username: "johndoe",
+      password: await bcrypt.hash("@Secret123", 10),
+      token: "123456789"
+    }
+  });
+
+  const response = await request(web)
+    .patch('/api/users/current')
+    .set('Accept', 'application/json')
+    .set('Authorization', user.token)
+    .send({
+      name: "",
+      password: "short"
+    })
+    .expect(400);
+
+  expect(response.body.errors.name).toBeDefined();
+  expect(response.body.errors.password).toBeDefined();
+});
