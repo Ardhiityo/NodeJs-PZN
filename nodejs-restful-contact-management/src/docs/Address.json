@@ -4,7 +4,11 @@
         "title": "Address API",
         "version": "1.0"
     },
-    "servers": [{ "url": "http://localhost:8000" }],
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
     "paths": {
         "/api/contacts/{idContacts}/addresses": {
             "post": {
@@ -77,9 +81,6 @@
                                                     "type": "string"
                                                 }
                                             }
-                                        },
-                                        "errors": {
-                                            "type": "object"
                                         }
                                     }
                                 }
@@ -134,9 +135,6 @@
                                                     }
                                                 }
                                             }
-                                        },
-                                        "errors": {
-                                            "type": "object"
                                         }
                                     }
                                 }
@@ -198,9 +196,6 @@
                                                     "type": "string"
                                                 }
                                             }
-                                        },
-                                        "errors": {
-                                            "type": "object"
                                         }
                                     }
                                 }
@@ -286,9 +281,6 @@
                                                     "type": "string"
                                                 }
                                             }
-                                        },
-                                        "errors": {
-                                            "type": "object"
                                         }
                                     }
                                 }
@@ -316,9 +308,6 @@
                                     "properties": {
                                         "data": {
                                             "type": "boolean"
-                                        },
-                                        "errors": {
-                                            "type": "object"
                                         }
                                     }
                                 }

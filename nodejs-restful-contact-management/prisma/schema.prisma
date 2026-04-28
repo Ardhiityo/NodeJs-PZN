@@ -25,8 +25,8 @@ model Contact {
   id         BigInt    @id() @default(autoincrement()) @db.BigInt
   first_name String    @db.VarChar(255)
   last_name  String?   @db.VarChar(255)
-  email      String    @db.VarChar(255)
-  phone      String    @db.VarChar(255)
+  email      String?    @db.VarChar(255)
+  phone      String?    @db.VarChar(255)
   user_id     BigInt    @db.BigInt
   user       User      @relation(fields: [user_id], references: [id])
   address    Address[]
@@ -36,11 +36,11 @@ model Contact {
 
 model Address {
   id          BigInt  @id() @default(autoincrement()) @db.BigInt
-  street      String  @db.VarChar(255)
+  street      String?  @db.VarChar(255)
   city        String  @db.VarChar(255)
   province    String  @db.VarChar(255)
   country     String  @db.VarChar(255)
-  postal_code String  @db.VarChar(255)
+  postal_code String? @db.VarChar(255)
   contact_id   BigInt  @db.BigInt
   contact     Contact @relation(fields: [contact_id], references: [id])
 

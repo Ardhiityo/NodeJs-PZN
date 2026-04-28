@@ -69,9 +69,6 @@
                                                     "type": "string"
                                                 }
                                             }
-                                        },
-                                        "errors": {
-                                            "type": "object"
                                         }
                                     }
                                 }
@@ -175,11 +172,19 @@
                                                 }
                                             }
                                         },
-                                        "meta": {
-                                            "type": "object"
-                                        },
-                                        "errors": {
-                                            "type": "object"
+                                        "paging": {
+                                            "type": "object",
+                                            "properties": {
+                                                "total_item": {
+                                                    "type": "number"
+                                                },
+                                                "total_page": {
+                                                    "type": "number"
+                                                },
+                                                "page": {
+                                                    "type": "number"
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -254,9 +259,6 @@
                                                     "type": "string"
                                                 }
                                             }
-                                        },
-                                        "errors": {
-                                            "type": "object"
                                         }
                                     }
                                 }
@@ -337,9 +339,6 @@
                                                     "type": "string"
                                                 }
                                             }
-                                        },
-                                        "errors": {
-                                            "type": "object"
                                         }
                                     }
                                 }
@@ -372,9 +371,6 @@
                                     "properties": {
                                         "data": {
                                             "type": "boolean"
-                                        },
-                                        "errors": {
-                                            "type": "object"
                                         }
                                     }
                                 }

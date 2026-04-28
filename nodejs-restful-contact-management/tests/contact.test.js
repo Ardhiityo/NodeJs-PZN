@@ -33,6 +33,7 @@ test('create contact success', async () => {
             email: "john@example.com",
             phone: "081234567890"
         })
+        .expect(201)
 
     expect(response.body.data.first_name).toBe('John');
     expect(response.body.data.last_name).toBe('Doe');

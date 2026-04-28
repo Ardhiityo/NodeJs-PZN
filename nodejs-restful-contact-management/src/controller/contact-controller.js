@@ -7,7 +7,7 @@ const create = async (req, res) => {
 
     const contact = await contactService.create(req);
 
-    return ResponseFormatter.success(res, contact, 200);
+    return ResponseFormatter.success(res, contact, 201);
 }
 
 const update = async (req, res) => {

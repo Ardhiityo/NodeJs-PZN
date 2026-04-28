@@ -80,8 +80,7 @@
                                                 "id": 1,
                                                 "username": "eko",
                                                 "name": "Eko Kurniawan Khannedy"
-                                            },
-                                            "errors": {}
+                                            }
                                         }
                                     }
                                 }
@@ -165,9 +164,6 @@
                                                     "type": "string"
                                                 }
                                             }
-                                        },
-                                        "errors": {
-                                            "type": "object"
                                         }
                                     }
                                 }
@@ -221,9 +217,6 @@
                                                     "type": "string"
                                                 }
                                             }
-                                        },
-                                        "errors": {
-                                            "type": "object"
                                         }
                                     }
                                 }
@@ -278,9 +271,6 @@
                                                     "type": "string"
                                                 }
                                             }
-                                        },
-                                        "errors": {
-                                            "type": "object"
                                         }
                                     }
                                 }
@@ -330,9 +320,6 @@
                                 "properties": {
                                     "data": {
                                         "type": "boolean"
-                                    },
-                                    "errors": {
-                                        "type": "object"
                                     }
                                 }
                             }
