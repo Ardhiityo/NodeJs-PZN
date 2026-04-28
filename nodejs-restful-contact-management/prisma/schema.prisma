@@ -27,8 +27,8 @@ model Contact {
   last_name  String?   @db.VarChar(255)
   email      String    @db.VarChar(255)
   phone      String    @db.VarChar(255)
-  userId     BigInt    @db.BigInt
-  user       User      @relation(fields: [userId], references: [id])
+  user_id     BigInt    @db.BigInt
+  user       User      @relation(fields: [user_id], references: [id])
   address    Address[]
 
   @@map("contacts")
@@ -41,8 +41,8 @@ model Address {
   province    String  @db.VarChar(255)
   country     String  @db.VarChar(255)
   postal_code String  @db.VarChar(255)
-  contactId   BigInt  @db.BigInt
-  contact     Contact @relation(fields: [contactId], references: [id])
+  contact_id   BigInt  @db.BigInt
+  contact     Contact @relation(fields: [contact_id], references: [id])
 
   @@map("addresses")
 }

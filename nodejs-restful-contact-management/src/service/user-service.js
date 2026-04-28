@@ -26,7 +26,7 @@ const login = async (request) => {
 
     if (user) {
         if (await bcrypt.compare(request.body.password, user.password)) {
-            let user = await prisma.user.update({
+            return await prisma.user.update({
                 where: {
                     username: request.body.username
                 },
@@ -40,12 +40,7 @@ const login = async (request) => {
                     token: true
                 }
             });
-            return {
-                id: user.id.toString(),
-                name: user.name,
-                username: user.username,
-                token: user.token
-            }
+
         }
     }
     throw new AuthenticationException("Username or Password is not valid");
@@ -54,7 +49,7 @@ const login = async (request) => {
 const logout = async (request) => {
     return await prisma.user.update({
         where: {
-            token: request.get('Authorization')
+            id: request.user.id
         },
         data: {
             token: null
@@ -63,15 +58,9 @@ const logout = async (request) => {
 }
 
 const update = async (request) => {
-    const user = await prisma.user.findUnique({
+    return await prisma.user.update({
         where: {
-            token: request.get('Authorization')
-        }
-    });
-
-    const userUpdated = await prisma.user.update({
-        where: {
-            token: request.get('Authorization')
+            id: request.user.id
         },
         data: {
             name: request.body.name ?? user.name,
@@ -84,18 +73,12 @@ const update = async (request) => {
             username: true
         }
     });
-
-    return {
-        id: userUpdated.id.toString(),
-        name: userUpdated.name,
-        username: userUpdated.username
-    }
 }
 
 const current = async (request) => {
-    const user = await prisma.user.findUnique({
+    return await prisma.user.findUnique({
         where: {
-            token: request.get('Authorization')
+            id: request.user.id
         },
         select: {
             id: true,
@@ -103,12 +86,6 @@ const current = async (request) => {
             username: true
         }
     });
-
-    return {
-        id: user.id.toString(),
-        name: user.name,
-        username: user.username
-    }
 }
 
 export default {

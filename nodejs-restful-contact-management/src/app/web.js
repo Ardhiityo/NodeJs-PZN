@@ -2,6 +2,10 @@ import express from 'express';
 import { publicRouter, apiRouter } from '../route/api.js';
 import exception from '../middleware/exception.js';
 
+BigInt.prototype.toJSON = function () {
+    return this.toString();
+};
+
 const web = express();
 
 web.use(express.json());

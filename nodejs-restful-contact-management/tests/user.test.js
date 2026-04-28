@@ -4,7 +4,8 @@ import prisma from '../src/app/database.js';
 import bcrypt from 'bcrypt';
 
 beforeEach(async () => {
-  await prisma.user.deleteMany();
+  await prisma.contact.deleteMany({});
+  await prisma.user.deleteMany({});
 });
 
 afterAll(async () => {
