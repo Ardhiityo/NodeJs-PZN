@@ -21,7 +21,7 @@ afterAll(async () => {
     try {
         await redis.quit();
     } catch (err) {
-        redis.disconnect();
+        await redis.disconnect();
     }
 });
 
@@ -122,6 +122,16 @@ test('should can support geo point', async () => {
 
     const search = await redis.geosearch('seller', 'fromlonlat', 106.054349, -6.030929, 'byradius', 1, 'km');
     expect(search).toEqual(['Toko A', 'Toko B']);
+    
+    await redis.del('seller');
+})
+
+test('should can support hyper log log', async () => {
+    await redis.pfadd('authors', ['Eko', 'Kurniawan', 'Khannedy']);
+    await redis.pfadd('authors', ['Eko', 'Kurniawan', 'Khannedy']);
+    await redis.pfadd('authors', ['Rully', 'Joko', 'Budi']);
+
+    expect(await redis.pfcount('authors')).toBe(6);
     
     await redis.del('seller');
 })
