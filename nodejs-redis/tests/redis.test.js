@@ -43,5 +43,24 @@ test('should can support list', async () => {
 
     expect(await redis.llen('name')).toBe(1);
 
-    redis.del('name');
+    await redis.del('name');
+})
+
+test('should can support set', async () => {
+    //set hanya menyimpan data dengan key unique
+    await redis.sadd('names', 'Eko');
+    await redis.sadd('names', 'Eko');
+    await redis.sadd('names', 'Kurniawan');
+    await redis.sadd('names', 'Kurniawan');
+    await redis.sadd('names', 'Khannedy');
+    await redis.sadd('names', 'Khannedy');
+
+    let names = await redis.scard('names');
+    expect(names).toBe(3);
+
+    names = await redis.smembers('names');
+  
+    expect(names).toEqual(expect.arrayContaining(['Eko', 'Kurniawan', 'Khannedy']));
+
+    await redis.del('name');
 })
