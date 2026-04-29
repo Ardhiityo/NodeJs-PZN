@@ -59,8 +59,26 @@ test('should can support set', async () => {
     expect(names).toBe(3);
 
     names = await redis.smembers('names');
-  
+
     expect(names).toEqual(expect.arrayContaining(['Eko', 'Kurniawan', 'Khannedy']));
 
     await redis.del('name');
+})
+
+test('should can support sorted set', async () => {
+    await redis.zadd('names', 100, 'Eko');
+    await redis.zadd('names', 85, 'Joko');
+    await redis.zadd('names', 95, 'Budi');
+
+    let names = await redis.zcard('names');
+    expect(names).toBe(3);
+
+    names = await redis.zrange('names', 0, -1);
+    expect(names).toEqual(['Joko', 'Budi', 'Eko']);
+
+    expect(await redis.zpopmax('names')).toEqual(['Eko', '100']);
+    expect(await redis.zpopmax('names')).toEqual(['Budi', '95']);
+    expect(await redis.zpopmax('names')).toEqual(['Joko', '85']);
+
+    await redis.del('names');
 })
