@@ -82,3 +82,19 @@ test('should can support sorted set', async () => {
 
     await redis.del('names');
 })
+
+test('should can support hash', async () => {
+    await redis.hset('user:1', {
+        name: 'Eko',
+        age: 30,
+        country: 'Indonesia'
+    });
+
+    expect(await redis.hgetall('user:1')).toEqual({
+        name: 'Eko',
+        age: '30',
+        country: 'Indonesia'
+    });
+
+    await redis.del('user:1');
+})
