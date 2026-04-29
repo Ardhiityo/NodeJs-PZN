@@ -176,3 +176,36 @@ test('should can support stream', async () => {
     expect(result).not.toBeNull();
     console.info(JSON.stringify(result, null, 2));
 })
+
+test('should can support pubsub', async () => {
+    const subscriber = new Redis({ host: '127.0.0.1', port: 6379, db: 0 });
+    const publisher = new Redis({ host: '127.0.0.1', port: 6379, db: 0 });
+
+    // Tambahkan penangan error untuk kedua koneksi baru ini
+    subscriber.on('error', (err) => console.error('Subscriber Error:', err.message));
+    publisher.on('error', (err) => console.error('Publisher Error:', err.message));
+
+    await subscriber.subscribe('channel-1');
+
+    subscriber.on('message', (channel, message) => {
+        console.log(`Received from channel ${channel} with message ${message}`);
+    });
+
+    for (let i = 0; i < 10; i++) {
+        await publisher.publish('channel-1', `Hello World ${i}`);
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    // Gunakan try-catch saat menutup koneksi khusus
+    try {
+        await subscriber.quit();
+    } catch (err) {
+        subscriber.disconnect();
+    }
+    try {
+        await publisher.quit();
+    } catch (err) {
+        publisher.disconnect();
+    }
+});
