@@ -159,3 +159,20 @@ test('should can support transaction', async () => {
     expect(await redis.get('name')).toBe('eko');
     expect(await redis.get('address')).toBe('indonesia');
 })
+
+test('should can support stream', async () => {
+    // 1. Publish data (agar stream 'members' ada isinya)
+    for (let i = 0; i < 10; i++) {
+        await redis.xadd('members', '*', 'name', `Eko ${i}`, 'address', 'Indonesia');
+    }
+
+    // 2. Buat Consumer Group
+    await redis.xgroup('CREATE', 'members', 'group-1', 0);
+    await redis.xgroup('CREATECONSUMER', 'members', 'group-1', 'consumer-1');
+    await redis.xgroup('CREATECONSUMER', 'members', 'group-1', 'consumer-2');
+
+    // 3. Consume data
+    const result = await redis.xreadgroup('GROUP', 'group-1', 'consumer-1', 'COUNT', 2, 'BLOCK', '3000', 'STREAMS', 'members', '>');
+    expect(result).not.toBeNull();
+    console.info(JSON.stringify(result, null, 2));
+})
