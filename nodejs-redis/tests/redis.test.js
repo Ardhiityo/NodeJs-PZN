@@ -147,3 +147,15 @@ test('should can support pipeline', async () => {
     expect(await redis.get('name')).toBe('eko');
     expect(await redis.get('address')).toBe('indonesia');
 })
+
+test('should can support transaction', async () => {
+    const transaction = redis.multi();
+
+    transaction.setex('name', 2, 'eko');
+    transaction.setex('address', 2, 'indonesia');
+
+    await transaction.exec();
+
+    expect(await redis.get('name')).toBe('eko');
+    expect(await redis.get('address')).toBe('indonesia');
+})
