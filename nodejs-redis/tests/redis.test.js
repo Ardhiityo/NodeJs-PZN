@@ -122,7 +122,7 @@ test('should can support geo point', async () => {
 
     const search = await redis.geosearch('seller', 'fromlonlat', 106.054349, -6.030929, 'byradius', 1, 'km');
     expect(search).toEqual(['Toko A', 'Toko B']);
-    
+
     await redis.del('seller');
 })
 
@@ -132,6 +132,18 @@ test('should can support hyper log log', async () => {
     await redis.pfadd('authors', ['Rully', 'Joko', 'Budi']);
 
     expect(await redis.pfcount('authors')).toBe(6);
-    
+
     await redis.del('seller');
+})
+
+test('should can support pipeline', async () => {
+    const pipeline = redis.pipeline();
+
+    pipeline.setex('name', 2, 'eko');
+    pipeline.setex('address', 2, 'indonesia');
+
+    await pipeline.exec();
+
+    expect(await redis.get('name')).toBe('eko');
+    expect(await redis.get('address')).toBe('indonesia');
 })
