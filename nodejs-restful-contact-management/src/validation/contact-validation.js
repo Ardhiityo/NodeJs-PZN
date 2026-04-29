@@ -9,17 +9,15 @@ const create = (request) => {
         phone: Joi.string().min(8).max(15).allow(null)
     });
 
-    const validate = rules.validate(request.body,
-        {
-            abortEarly: false,
-        }
-    );
+    const validate = rules.validate(request.body, {
+        abortEarly: false,
+    });
 
     const messages = {};
 
     if (validate.error) {
         validate.error.details.forEach(error => {
-            messages[error.path] = [error.message]
+            messages[error.path] = error.message
         });
         throw new ValidationException(messages);
     }
@@ -33,13 +31,15 @@ const update = (request) => {
         phone: Joi.string().min(8).max(15).allow(null)
     });
 
-    const validate = rules.validate(request.body, { abortEarly: false });
+    const validate = rules.validate(request.body, {
+        abortEarly: false
+    });
 
     const messages = {};
 
     if (validate.error) {
         validate.error.details.forEach(error => {
-            messages[error.path] = [error.message]
+            messages[error.path] = error.message
         });
         throw new ValidationException(messages);
     }

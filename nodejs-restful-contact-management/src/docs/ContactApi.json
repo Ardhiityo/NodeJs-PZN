@@ -82,24 +82,14 @@
                                 "examples": {
                                     "validation error": {
                                         "value": {
-                                            "errors": {
-                                                "first_name": [
-                                                    "first_name can't blank",
-                                                    "first_name min 6 character"
-                                                ],
-                                                "last_name": [
-                                                    "last_name can't blank",
-                                                    "last_name min 6 character"
-                                                ],
-                                                "email": [
-                                                    "email can't blank",
-                                                    "email min 6 character"
-                                                ],
-                                                "phone": [
-                                                    "phone can't blank",
-                                                    "phone min 6 character"
-                                                ]
-                                            }
+                                            "errors": [
+                                                {
+                                                    "first_name": "first_name can't blank"
+                                                },
+                                                {
+                                                    "last_name": "last_name can't blank"
+                                                }
+                                            ]
                                         }
                                     }
                                 }
@@ -272,24 +262,14 @@
                                 "examples": {
                                     "validation error": {
                                         "value": {
-                                            "errors": {
-                                                "first_name": [
-                                                    "first_name can't blank",
-                                                    "first_name min 6 character"
-                                                ],
-                                                "last_name": [
-                                                    "last_name can't blank",
-                                                    "username min 6 character"
-                                                ],
-                                                "email": [
-                                                    "email can't blank",
-                                                    "email min 6 character"
-                                                ],
-                                                "phone": [
-                                                    "phone can't blank",
-                                                    "phone min 6 character"
-                                                ]
-                                            }
+                                                "errors": [
+                                                {
+                                                    "first_name": "first_name can't blank"
+                                                },
+                                                {
+                                                    "last_name": "last_name can't blank"
+                                                }
+                                            ]
                                         }
                                     }
                                 }

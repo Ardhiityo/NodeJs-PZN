@@ -10,13 +10,15 @@ const create = (req, res) => {
         postal_code: Joi.string().min(4).max(7).allow(null)
     });
 
-    const validate = rules.validate(req.body);
+    const validate = rules.validate(req.body, {
+        abortEarly: false,
+    });
 
     const messages = {};
 
     if (validate.error) {
         validate.error.details.forEach(error => {
-            messages[error.path] = [error.message]
+            messages[error.path] = error.message
         });
         throw new ValidationException(messages);
     }
@@ -37,7 +39,7 @@ const update = (req, res) => {
 
     if (validate.error) {
         validate.error.details.forEach(error => {
-            messages[error.path] = [error.message]
+            messages[error.path] = error.message
         });
         throw new ValidationException(messages);
     }

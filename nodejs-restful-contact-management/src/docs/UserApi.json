@@ -94,16 +94,14 @@
                                 "examples": {
                                     "validation error": {
                                         "value": {
-                                            "errors": {
-                                                "username": [
-                                                    "username can't blank",
-                                                    "username min 6 character"
-                                                ],
-                                                "name": [
-                                                    "username can't blank",
-                                                    "username min 6 character"
-                                                ]
-                                            }
+                                            "errors": [
+                                                {
+                                                    "username": "first_name can't blank"
+                                                },
+                                                {
+                                                    "name": "last_name can't blank"
+                                                }
+                                            ]
                                         }
                                     }
                                 }
@@ -284,16 +282,14 @@
                                 "examples": {
                                     "validation error": {
                                         "value": {
-                                            "errors": {
-                                                "name": [
-                                                    "name can't blank",
-                                                    "name min 3 character"
-                                                ],
-                                                "password": [
-                                                    "password can't blank",
-                                                    "password min 6 character"
-                                                ]
-                                            }
+                                           "errors": [
+                                                {
+                                                    "name": "name can't blank"
+                                                },
+                                                {
+                                                    "password": "password can't blank"
+                                                }
+                                            ]
                                         }
                                     }
                                 }
