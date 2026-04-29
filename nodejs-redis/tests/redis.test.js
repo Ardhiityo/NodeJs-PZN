@@ -2,18 +2,32 @@ import Redis from 'ioredis';
 
 let redis = null;
 
-beforeEach(async () => {
+beforeAll(async () => {
     redis = new Redis({
-        host: 'localhost',
+        host: '127.0.0.1',
         port: 6379,
         db: 0
     });
-    await redis.flushdb();
+    redis.on('error', (err) => {
+        //console.error('Redis Client Error:', err.message);
+    });
+    // Menunggu koneksi siap sebelum menjalankan test
+    await new Promise((resolve) => {
+        redis.on('ready', resolve);
+    });
 });
 
-afterEach(async () => {
-    await redis.quit();
-})
+afterAll(async () => {
+    try {
+        await redis.quit();
+    } catch (err) {
+        redis.disconnect();
+    }
+});
+
+beforeEach(async () => {
+    await redis.flushdb();
+});
 
 test('should can ping', async () => {
     const response = await redis.ping();
@@ -97,4 +111,17 @@ test('should can support hash', async () => {
     });
 
     await redis.del('user:1');
+})
+
+test('should can support geo point', async () => {
+    await redis.geoadd('seller', 106.053875, -6.031233, 'Toko A');
+    await redis.geoadd('seller', 106.054813, -6.030625, 'Toko B');
+
+    const distance = await redis.geodist('seller', 'Toko A', 'Toko B')
+    expect(distance).toBe('123.9380');
+
+    const search = await redis.geosearch('seller', 'fromlonlat', 106.054349, -6.030929, 'byradius', 1, 'km');
+    expect(search).toEqual(['Toko A', 'Toko B']);
+    
+    await redis.del('seller');
 })
