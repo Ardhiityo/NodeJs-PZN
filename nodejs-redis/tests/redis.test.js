@@ -8,6 +8,7 @@ beforeEach(async () => {
         port: 6379,
         db: 0
     });
+    await redis.flushdb();
 });
 
 afterEach(async () => {
@@ -27,4 +28,20 @@ test('should can support string', async () => {
     const result = await redis.get('name');
 
     expect(result).toBeNull();
+})
+
+test('should can support list', async () => {
+    await redis.rpush('name', 'Eko');
+    await redis.rpush('name', 'Kurniawan');
+    await redis.rpush('name', 'Khannedy');
+
+    const name = await redis.lrange('name', 0, -1);
+    expect(name).toEqual(['Eko', 'Kurniawan', 'Khannedy']);
+
+    expect(await redis.lpop('name')).toBe('Eko');
+    expect(await redis.rpop('name')).toBe('Khannedy');
+
+    expect(await redis.llen('name')).toBe(1);
+
+    redis.del('name');
 })
