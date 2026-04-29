@@ -12,7 +12,9 @@ export default defineConfig([
     extends: ["js/recommended"],
     languageOptions: { globals: globals.browser },
     rules: {
-      "semi": "error"
+      "semi": "error",
+      "prefer-const" : "error",
+      "require-await": "error"
     }
   }
 ]);
