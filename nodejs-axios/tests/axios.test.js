@@ -18,8 +18,16 @@ test('Should support http client', () => {
 
 test('Should support http method', async () => {
 
-    const response = await instance.get();
-    
+    const response = await instance.get('/', {
+        headers: {
+            "Content-Type": "application.json",
+            "Accept": "application/json"
+        },
+        params: {
+            name: "Eko"
+        }
+    });
+
     expect(response).toBeDefined();
     expect(response.status).toBe(200);
 });
