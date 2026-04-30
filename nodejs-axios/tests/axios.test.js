@@ -25,6 +25,25 @@ instance.interceptors.request.use(
     }
 );
 
+// Add a response interceptor
+instance.interceptors.response.use(
+    async function (response) {
+        // Do something with response data
+        const fullUrl = response.config.baseURL + response.config.url;
+        const body = JSON.stringify(response.config.data);
+        console.log(`response from ${fullUrl} with data ${body}`);
+        return response;
+    },
+    async function (error) {
+        // Do something with response error
+        const fullUrl = response.config.baseURL + response.config.url;
+        console.log(`respone form ${fullUrl} with message ${error.message}`);
+        return Promise.reject(error);
+    },
+    {
+        synchronous: false
+    }
+);
 
 test('Should support http client', () => {
     const instance = axios.create({
