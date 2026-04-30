@@ -31,3 +31,20 @@ test('Should support http method', async () => {
     expect(response).toBeDefined();
     expect(response.status).toBe(200);
 });
+
+test('Should support http response', async () => {
+
+    const response = await instance.get('/', {
+        headers: {
+            "Content-Type": "application.json",
+            "Accept": "application/json"
+        },
+        params: {
+            name: "Eko"
+        }
+    });
+
+    expect(response).toBeDefined();
+    expect(response.status).toBe(200);
+    expect(response.statusText).toBe("OK");
+});
