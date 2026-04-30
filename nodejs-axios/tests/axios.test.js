@@ -185,3 +185,34 @@ test('Should support http with multipart form data', async () => {
     expect(response.status).toBe(200);
     expect(response.statusText).toBe("OK");
 });
+
+test('Should support error handler', async () => {
+    const api = axios.create({
+        baseURL: 'https://www.programmerzamannow.com',
+        timeout: 5000
+    });
+
+    try {
+        await api.get('/not-found');
+    } catch (error) {
+        console.log(error);
+        expect(error.response.status).toBe(404);
+    }
+})
+
+test('Should support error handler customize', async () => {
+    const api = axios.create({
+        baseURL: 'https://www.programmerzamannow.com',
+        timeout: 5000,
+        validateStatus: function (status) {
+            // Resolve only if the status code is less than 500
+            // Ketika status code < 500 maka tidak akan throw error
+            return status < 500;
+        },
+    });
+
+    const data = await api.get('/not-found');
+
+    console.log(data);
+    expect(data.status).toBe(404);
+})
