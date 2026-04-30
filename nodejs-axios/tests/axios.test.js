@@ -8,6 +8,24 @@ const instance = axios.create({
     headers: { "X-Custom-Header": "foobar" },
 });
 
+// Add a request interceptor
+instance.interceptors.request.use(
+    async function (config) {
+        // Do something before request is sent
+        console.log(`request send to ${config.baseURL}${config.url}`);
+        return config;
+    },
+    async function (error) {
+        // Do something with request error
+        console.log(`request error ${error.message}`)
+        return Promise.reject(error);
+    },
+    {
+        synchronous: false
+    }
+);
+
+
 test('Should support http client', () => {
     const instance = axios.create({
         baseURL: "https://eovkp0h5dtd7x0w.m.pipedream.net",
