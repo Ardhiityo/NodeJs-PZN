@@ -1,4 +1,6 @@
 import axios from "axios";
+import fs from 'fs';
+import FormData from "form-data";
 
 const instance = axios.create({
     baseURL: "https://eovkp0h5dtd7x0w.m.pipedream.net",
@@ -20,7 +22,7 @@ test('Should support http method', async () => {
 
     const response = await instance.get('/', {
         headers: {
-            "Content-Type": "application.json",
+            "Content-Type": "application/json",
             "Accept": "application/json"
         },
         params: {
@@ -36,11 +38,109 @@ test('Should support http response', async () => {
 
     const response = await instance.get('/', {
         headers: {
-            "Content-Type": "application.json",
+            "Content-Type": "application/json",
             "Accept": "application/json"
         },
         params: {
             name: "Eko"
+        }
+    });
+
+    expect(response).toBeDefined();
+    expect(response.status).toBe(200);
+    expect(response.statusText).toBe("OK");
+});
+
+test('Should support http with json', async () => {
+
+    const body = {
+        name: 'Eko',
+        age: 30
+    }
+
+    const response = await instance.post('/', body, {
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+    });
+
+    expect(response).toBeDefined();
+    expect(response.status).toBe(200);
+    expect(response.statusText).toBe("OK");
+});
+
+test('Should support http with text/plain', async () => {
+
+    const body = {
+        name: 'Eko',
+        address: "Indonesia"
+    }
+
+    const response = await instance.post('/', body, {
+        headers: {
+            "Content-Type": "text/plain",
+            "Accept": "application/json"
+        }
+    });
+
+    expect(response).toBeDefined();
+    expect(response.status).toBe(200);
+    expect(response.statusText).toBe("OK");
+});
+
+test('Should support http with form data', async () => {
+
+    const body = {
+        name: 'Eko',
+        email: "eko@test.com"
+    }
+
+    const response = await instance.post('/', body, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            "Accept": "application/json"
+        }
+    });
+
+    expect(response).toBeDefined();
+    expect(response.status).toBe(200);
+    expect(response.statusText).toBe("OK");
+});
+
+test('Should support http with form url encoded', async () => {
+
+    const body = {
+        name: 'Eko',
+        username: "eko"
+    }
+
+    const response = await instance.post('/', body, {
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Accept": "application/json"
+        }
+    });
+
+    expect(response).toBeDefined();
+    expect(response.status).toBe(200);
+    expect(response.statusText).toBe("OK");
+});
+
+test('Should support http with multipart form data', async () => {
+
+    const form = new FormData();
+    form.append("username", 'eko');
+    form.append("password", 'rahasia');
+
+    const image = fs.readFileSync(__dirname + '/sample.png');
+
+    form.append('profile', image, 'sample.png');
+
+    const response = await instance.post('/', form, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            "Accept": "application/json"
         }
     });
 
